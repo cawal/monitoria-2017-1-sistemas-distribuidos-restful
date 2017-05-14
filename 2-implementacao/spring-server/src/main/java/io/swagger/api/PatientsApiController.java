@@ -59,7 +59,18 @@ public class PatientsApiController implements PatientsApi {
 
     public ResponseEntity<Void> patientsIdDelete(@ApiParam(value = "The patient ID.",required=true ) @PathVariable("id") String id) {
         // do some magic!
-        return new ResponseEntity<Void>(HttpStatus.OK);
+        System.out.println("patientsIdDelete");
+        List<Patient> patientList = PatientDaoMock.getPatients();
+
+        for(Patient p : patientList){
+            if(p.getId().equalsIgnoreCase(id)){
+                patientList.remove(p);
+                return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+            }
+        }
+
+        return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+
     }
 
     public ResponseEntity<Patient> patientsIdGet(@ApiParam(value = "The patient ID.",required=true ) @PathVariable("id") String id) {
