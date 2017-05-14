@@ -18,6 +18,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
+import io.swagger.dao.*;
+
 import javax.validation.constraints.*;
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-14T20:17:40.903Z")
 
@@ -28,7 +30,10 @@ public class PatientsApiController implements PatientsApi {
 
     public ResponseEntity<List<Patient>> patientsGet( @ApiParam(value = "Filters users by a substring of its names.") @RequestParam(value = "name", required = false) String name) {
         // do some magic!
-        return new ResponseEntity<List<Patient>>(HttpStatus.OK);
+        System.out.println("patientsGet");
+        List<Patient> patientList = PatientDaoMock.getPatients();
+
+        return new ResponseEntity<List<Patient>>(patientList, HttpStatus.OK);
     }
 
     public ResponseEntity<List<Appointment>> patientsIdAppointmentsGet(@ApiParam(value = "The patient ID.",required=true ) @PathVariable("id") String id) {
