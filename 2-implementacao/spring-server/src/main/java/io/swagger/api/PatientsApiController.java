@@ -64,7 +64,18 @@ public class PatientsApiController implements PatientsApi {
 
     public ResponseEntity<Patient> patientsIdGet(@ApiParam(value = "The patient ID.",required=true ) @PathVariable("id") String id) {
         // do some magic!
-        return new ResponseEntity<Patient>(HttpStatus.OK);
+        System.out.println("patientsIdGet");
+        List<Patient> patientList = PatientDaoMock.getPatients();
+
+        for(Patient p : patientList){
+            if(p.getId().equalsIgnoreCase(id)){
+                return new ResponseEntity<Patient>(p, HttpStatus.OK);
+            }
+        }
+
+        return new ResponseEntity<Patient>(HttpStatus.NOT_FOUND);
+
+        
     }
 
     public ResponseEntity<Void> patientsIdPut(@ApiParam(value = "The patient ID.",required=true ) @PathVariable("id") String id,
