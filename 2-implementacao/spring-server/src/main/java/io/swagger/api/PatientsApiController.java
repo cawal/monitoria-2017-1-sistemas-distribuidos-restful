@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.swagger.dao.*;
@@ -32,8 +33,23 @@ public class PatientsApiController implements PatientsApi {
         // do some magic!
         System.out.println("patientsGet");
         List<Patient> patientList = PatientDaoMock.getPatients();
+        List<Patient> returnList = new ArrayList<Patient>();
 
-        return new ResponseEntity<List<Patient>>(patientList, HttpStatus.OK);
+        if(name == null) {
+            returnList = patientList;
+        } else {
+            for(Patient p : patientList) {
+                if(p.getName().startsWith(name)){
+                    returnList.add(p);
+                }
+            }
+        }
+
+        if(returnList.size() > 0) {
+            return new ResponseEntity<List<Patient>>(returnList, HttpStatus.OK);
+        } else {
+             return new ResponseEntity<List<Patient>>(returnList, HttpStatus.NOT_FOUND);
+        }
     }
 
     public ResponseEntity<List<Appointment>> patientsIdAppointmentsGet(@ApiParam(value = "The patient ID.",required=true ) @PathVariable("id") String id) {
