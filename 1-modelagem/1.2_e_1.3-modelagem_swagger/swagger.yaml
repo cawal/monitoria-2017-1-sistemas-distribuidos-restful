@@ -1,0 +1,418 @@
+swagger: '2.0'
+info:
+  title: MyClinic API
+  description: My nice API to give to other developers
+  version: "1.0.0"
+# the domain of the service
+host: localhost
+# array of all schemes that your API supports
+schemes:
+  - http
+# will be prefixed to all paths
+basePath: /v1
+produces:
+  - application/json
+consumes:
+  - application/json
+
+
+paths:
+
+  /patients:
+    get:
+      summary: Patient list
+      description: |
+        Allows to return patient list.
+      parameters:
+      - name: name
+        in: query
+        description: Filters users by a substring of its names.
+        type: string
+        required: false
+      responses:
+        200:
+          description: An array of patients
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Patient'
+        404:
+            description: No patients found.
+            schema:
+              $ref: '#/definitions/Error'
+    post:
+      summary: Add individual patients to list
+      parameters:
+        - name: patient
+          description: The new patient to include.
+          in: body
+          schema:
+            $ref: '#/definitions/Patient'
+      responses:
+        201:
+          description: Patient created successfully.
+        400:
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        409:
+          description: Conflict.
+          schema:
+            $ref: '#/definitions/Error'
+
+
+  /patients/{id}:
+    parameters:
+      - name: id
+        in: path
+        description: The patient ID.
+        type: string
+        required: true
+    get:
+      summary: Return individual patients
+      responses:
+        200:
+          description: The desired patient
+          schema:
+            $ref: '#/definitions/Patient'
+        404:
+          description: Erroneous ID.
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      summary: Update individual patients
+      parameters:
+        - name: patient
+          description: The new version of the patient.
+          in: body
+          schema:
+            $ref: '#/definitions/Patient'
+      responses:
+        204:
+          description: Patient updated successfully. No content to return.
+        400:
+          description: Bad request. Error in request format.
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: Patient does not exists.
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      summary: Remove individual patients from list
+      responses:
+        204:
+          description: Patient deleted successfully.  No content to return.
+        404:
+          description: Patient does not exists.
+          schema:
+            $ref: '#/definitions/Error'
+
+
+
+  /patients/{id}/appointments:
+    parameters:
+      - name: id
+        in: path
+        description: The patient ID.
+        type: string
+        required: true
+    get:
+      summary: Retrieve the list of appointments of patient
+      responses:
+        200:
+          description: The list of appointments of the patient.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Appointment'
+        404:
+          description: Erroneous ID.
+          schema:
+            $ref: '#/definitions/Error'
+
+
+
+
+
+  /physicians:
+    get:
+      summary: Physician list
+      description: |
+        Allows to return patient list.
+      parameters:
+      - name: name
+        in: query
+        description: Filters physicians by a substring of its names.
+        type: string
+        required: false
+      responses:
+        200:
+          description: An array of physicians
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Physician'
+        404:
+            description: No physician found.
+            schema:
+              $ref: '#/definitions/Error'
+    post:
+      summary: Add individual physicians to list
+      parameters:
+        - name: patient
+          description: The new physicians to include.
+          in: body
+          schema:
+            $ref: '#/definitions/Patient'
+      responses:
+        201:
+          description: Physicians created successfully.
+        400:
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        409:
+          description: Conflict.
+          schema:
+            $ref: '#/definitions/Error'
+
+
+
+
+  /physicians/{id}:
+    parameters:
+      - name: id
+        in: path
+        description: The physician ID.
+        type: string
+        required: true
+    get:
+      summary: Retrieve individual physician from list
+      responses:
+        200:
+          description: The desired physician
+          schema:
+            $ref: '#/definitions/Physician'
+        404:
+          description: Erroneous ID.
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      summary: Update individual physicians
+      parameters:
+        - name: patient
+          description: The new version of the physicians.
+          in: body
+          schema:
+            $ref: '#/definitions/Physician'
+      responses:
+        204:
+          description: Physician updated successfully. No content to return.
+        400:
+          description: Bad request. Error in request format.
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: Physician does not exists.
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      summary: Remove individual physicians from list
+      responses:
+        204:
+          description: Physician deleted successfully.  No content to return.
+        404:
+          description: Physician does not exists.
+          schema:
+            $ref: '#/definitions/Error'
+
+
+  /physicians/{id}/appointments:
+    parameters:
+      - name: id
+        in: path
+        description: The physician ID.
+        type: string
+        required: true
+    get:
+      responses:
+        200:
+          description: The list of appointments of the physician.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Appointment'
+        404:
+          description: Erroneous ID.
+          schema:
+            $ref: '#/definitions/Error'
+
+
+
+  /appointments:
+    get:
+      summary: Appointment list
+      description: |
+        Allows to return appointment list.
+      parameters:
+      - name: fromDate
+        in: query
+        description: Only return appointments that start AFTER this date.
+        type: string
+        format: date
+        required: false
+      - name: toDate
+        in: query
+        description: Only return appointments that start BEFORE this date.
+        type: string
+        format: date
+        required: false
+      responses:
+        200:
+          description: An array of appointments
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Appointment'
+        404:
+            description: No appointments found.
+            schema:
+              $ref: '#/definitions/Error'
+    post:
+      summary: Add appointments to list
+      parameters:
+        - name: appointments
+          description: The new appointments to include.
+          in: body
+          schema:
+            $ref: '#/definitions/Appointment'
+      responses:
+        201:
+          description: Appointment created successfully.
+        400:
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        409:
+          description: Conflict.
+          schema:
+            $ref: '#/definitions/Error'
+
+
+
+
+  /appoitments/{id}:
+    parameters:
+      - name: id
+        in: path
+        description: The physician ID.
+        type: string
+        required: true
+    get:
+      summary: Retrieve individual physician from list
+      responses:
+        200:
+          description: The desired physician
+          schema:
+            $ref: '#/definitions/Physician'
+        404:
+          description: Erroneous ID.
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      summary: Update appointment
+      parameters:
+        - name: appointment
+          description: The new version of the appointment.
+          in: body
+          schema:
+            $ref: '#/definitions/Appointment'
+      responses:
+        204:
+          description: Appointment updated successfully. No content to return.
+        400:
+          description: Bad request. Error in request format.
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: Appointment does not exists.
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      summary: Remove appointments from list
+      responses:
+        204:
+          description: Appointment deleted successfully.  No content to return.
+        404:
+          description: Appointment does not exists.
+          schema:
+            $ref: '#/definitions/Error'
+
+
+
+
+definitions:
+
+  Patient:
+    type: object
+    properties:
+      id:
+        type: string
+        description: The unique global id of this patient.
+      name:
+        type: string
+        description: The patient's full name.
+      telephones:
+        type: array
+        items:
+          $ref: '#/definitions/Telephone'
+      preferredPhone:
+        type: string
+        description: The ID of the preferred phone to call this patient.
+
+  Telephone:
+    type: object
+    properties:
+      id:
+        type: string
+        description: The unque global id of this telephone number.
+      number:
+        type: string
+        description: The full telephone number.
+
+
+  Physician:
+    type: object
+    properties:
+      id:
+        type: string
+        description: The unique global id of this physician.
+      name:
+        type: string
+        description: The physician's full name.
+
+  Appointment:
+    type: object
+    properties:
+      id:
+        type: string
+        description: The unique global id of this appontment.
+      physician:
+        $ref: '#/definitions/Physician'
+      patient:
+        $ref: '#/definitions/Patient'
+      date:
+        type: string
+        format: dateTime
+
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      fields:
+        type: string
