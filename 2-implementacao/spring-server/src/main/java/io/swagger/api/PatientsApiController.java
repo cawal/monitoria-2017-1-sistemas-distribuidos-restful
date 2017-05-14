@@ -92,7 +92,28 @@ public class PatientsApiController implements PatientsApi {
     public ResponseEntity<Void> patientsIdPut(@ApiParam(value = "The patient ID.",required=true ) @PathVariable("id") String id,
         @ApiParam(value = "The new version of the patient."  ) @RequestBody Patient patient) {
         // do some magic!
-        return new ResponseEntity<Void>(HttpStatus.OK);
+
+        // do some magic!
+        System.out.println("patientsIdPut");
+        List<Patient> patientList = PatientDaoMock.getPatients();
+
+        // validate!
+        if(!validatePatient(patient) || !id.equalsIgnoreCase(patient.getId())){
+            return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+        }
+
+        for(Patient p : patientList){
+            if(p.getId().equalsIgnoreCase(id)){
+                // must update this patient
+                // I'm NOT preserving order here (must be important in some applications)
+                patientList.remove(p);
+                patientList.add(patient);
+                // everything ok, nothing to return
+                return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+            }
+        }
+        // if here, patient was not found
+        return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
     }
 
     public ResponseEntity<Void> patientsPost(@ApiParam(value = "The new patient to include."  ) @RequestBody Patient patient) {
@@ -101,7 +122,7 @@ public class PatientsApiController implements PatientsApi {
         List<Patient> patientList = PatientDaoMock.getPatients();
 
         // validate!
-        if(patient.getId() == null || patient.getName() == null){
+        if(!validatePatient(patient)){
             return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
         }
 
@@ -117,4 +138,8 @@ public class PatientsApiController implements PatientsApi {
         return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
 
+
+    public static boolean validatePatient(Patient patient){
+        return patient.getId() != null && patient.getName() != null;
+    }
 }
