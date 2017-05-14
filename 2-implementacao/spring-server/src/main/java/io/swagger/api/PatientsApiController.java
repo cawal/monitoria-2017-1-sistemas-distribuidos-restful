@@ -97,7 +97,24 @@ public class PatientsApiController implements PatientsApi {
 
     public ResponseEntity<Void> patientsPost(@ApiParam(value = "The new patient to include."  ) @RequestBody Patient patient) {
         // do some magic!
-        return new ResponseEntity<Void>(HttpStatus.OK);
+        System.out.println("patientsPost");
+        List<Patient> patientList = PatientDaoMock.getPatients();
+
+        // validate!
+        if(patient.getId() == null || patient.getName() == null){
+            return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+        }
+
+        for(Patient p : patientList){
+            if(p.getId().equalsIgnoreCase(patient.getId())){
+                // two patients with same ID!
+                return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+            }
+        }
+
+        patientList.add(patient);
+
+        return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
 
 }
