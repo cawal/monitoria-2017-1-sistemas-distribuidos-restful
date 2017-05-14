@@ -39,7 +39,7 @@ public class PatientsApiController implements PatientsApi {
             returnList = patientList;
         } else {
             for(Patient p : patientList) {
-                if(p.getName().startsWith(name)){
+                if(p.getName().contains(name)){
                     returnList.add(p);
                 }
             }
