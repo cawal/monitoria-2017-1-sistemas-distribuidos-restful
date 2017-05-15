@@ -7,7 +7,7 @@ header-includes:
     - \usepackage[brazilian]{babel}
     - \usepackage{url}
 ---
-# IBM1050 - Sistemas Distribuídos - 1º sem. 2017 \newline{} Objectio
+# IBM1050 - Sistemas Distribuídos - 1º sem. 2017 \newline{} Implementação de um serviço RESTful
 
 ## Objetivo
 
