@@ -1,0 +1,196 @@
+{
+	"_type": "export",
+	"__export_format": 3,
+	"__export_date": "2017-05-15T13:05:40.985Z",
+	"__export_source": "insomnia.desktop.app:v5.0.12",
+	"resources": [
+		{
+			"_id": "wrk_184431c649244b829e60b4b01f99daa2",
+			"parentId": null,
+			"modified": 1494853362541,
+			"created": 1494798972115,
+			"name": "PAE",
+			"description": "",
+			"certificates": [],
+			"_type": "workspace"
+		},
+		{
+			"_id": "env_20addce40aba48dca852fd19cde2e847",
+			"parentId": "wrk_184431c649244b829e60b4b01f99daa2",
+			"modified": 1494853362536,
+			"created": 1494798993981,
+			"name": "Base Environment",
+			"data": {},
+			"_type": "environment"
+		},
+		{
+			"_id": "jar_623cc34c0cb043ef9177042e21c9c417",
+			"parentId": "wrk_184431c649244b829e60b4b01f99daa2",
+			"modified": 1494853531658,
+			"created": 1494798994244,
+			"name": "Default Jar",
+			"cookies": [],
+			"_type": "cookie_jar"
+		},
+		{
+			"_id": "req_022a0a95ee6240118e93725bc331b86c",
+			"parentId": "wrk_184431c649244b829e60b4b01f99daa2",
+			"modified": 1494853362534,
+			"created": 1494798981591,
+			"url": "localhost:8080/v1/patients",
+			"name": "Get patients",
+			"method": "GET",
+			"body": {
+				"text": ""
+			},
+			"parameters": [],
+			"headers": [
+				{
+					"name": "Accept",
+					"value": "application/json"
+				},
+				{
+					"name": "Content-type",
+					"value": "application/json"
+				},
+				{
+					"name": "",
+					"value": ""
+				}
+			],
+			"authentication": {},
+			"metaSortKey": -1494798981591,
+			"settingStoreCookies": true,
+			"settingSendCookies": true,
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"_type": "request"
+		},
+		{
+			"_id": "req_bea614393173432ea108ea2c7d611f45",
+			"parentId": "wrk_184431c649244b829e60b4b01f99daa2",
+			"modified": 1494853409868,
+			"created": 1494800412969,
+			"url": "localhost:8080/v1/patients/chico",
+			"name": "Get Patient",
+			"method": "GET",
+			"body": {
+				"text": ""
+			},
+			"parameters": [],
+			"headers": [
+				{
+					"name": "Content-type",
+					"value": "application/json",
+					"id": "pair_f5a04e773d884c9da67d31238b5f5d9e"
+				},
+				{
+					"name": "Accept",
+					"value": "application/json",
+					"id": "pair_1c040a5de5d1454da17d461bffb1c8e9"
+				},
+				{
+					"name": "",
+					"value": "",
+					"id": "pair_d52cb97eb47f44babcb986c044a36038"
+				}
+			],
+			"authentication": {},
+			"metaSortKey": -1494800412969,
+			"settingStoreCookies": true,
+			"settingSendCookies": true,
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"_type": "request"
+		},
+		{
+			"_id": "req_a0e40959490b4137b1eb43669e7f5052",
+			"parentId": "wrk_184431c649244b829e60b4b01f99daa2",
+			"modified": 1494853423636,
+			"created": 1494800826233,
+			"url": "localhost:8080/v1/patients/chico",
+			"name": "Delete Patient",
+			"method": "DELETE",
+			"body": {
+				"text": ""
+			},
+			"parameters": [
+				{
+					"name": "",
+					"value": "",
+					"id": "pair_e015737acd0e412a878a82106e7a97ba"
+				}
+			],
+			"headers": [
+				{
+					"name": "Content-type",
+					"value": "application/json",
+					"id": "pair_3d978ac3b8aa4aef9d38a3f6a870cc26"
+				}
+			],
+			"authentication": {},
+			"metaSortKey": -1494800826233,
+			"settingStoreCookies": true,
+			"settingSendCookies": true,
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"_type": "request"
+		},
+		{
+			"_id": "req_0be182758e774209b2d9219479afed8f",
+			"parentId": "wrk_184431c649244b829e60b4b01f99daa2",
+			"modified": 1494853494692,
+			"created": 1494801116973,
+			"url": "localhost:8080/v1/patients/",
+			"name": "Create Patient",
+			"method": "POST",
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\t\"id\": \"chico_do_calice\",\n\t\t\"name\": \"Chico Buarque\",\n\t\t\"telephones\": [\n\t\t\t{\n\t\t\t\t\"id\": \"1\",\n\t\t\t\t\"number\": \"+55 16 3333 3332\"\n\t\t\t}\n\t\t],\n\t\t\"preferredPhone\": \"1\"\n}"
+			},
+			"parameters": [],
+			"headers": [
+				{
+					"name": "Content-Type",
+					"value": "application/json",
+					"id": "pair_57a8348ba1ed4bc6b9936063712d5a90"
+				}
+			],
+			"authentication": {},
+			"metaSortKey": -1494801116973,
+			"settingStoreCookies": true,
+			"settingSendCookies": true,
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"_type": "request"
+		},
+		{
+			"_id": "req_6b7594dead4f4ca7b3c36286cd319fe6",
+			"parentId": "wrk_184431c649244b829e60b4b01f99daa2",
+			"modified": 1494853526877,
+			"created": 1494802231463,
+			"url": "localhost:8080/v1/patients/chico_do_calice",
+			"name": "Update Patient",
+			"method": "PUT",
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\t\"id\": \"chico_do_calice\",\n\t\t\"name\": \"Chico Buarque de Holanda\",\n\t\t\"telephones\": [\n\t\t\t{\n\t\t\t\t\"id\": \"22253451-2cd7-4dd3-8e39-550ae5972818\",\n\t\t\t\t\"number\": \"+55 16 3333 3332\"\n\t\t\t}\n\t\t],\n\t\t\"preferredPhone\": \"22253451-2cd7-4dd3-8e39-550ae5972818\"\n}"
+			},
+			"parameters": [],
+			"headers": [
+				{
+					"name": "Content-Type",
+					"value": "application/json",
+					"id": "pair_f33506e6f1834566a2fcef49769b1767"
+				}
+			],
+			"authentication": {},
+			"metaSortKey": -1494802231463,
+			"settingStoreCookies": true,
+			"settingSendCookies": true,
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"_type": "request"
+		}
+	]
+}

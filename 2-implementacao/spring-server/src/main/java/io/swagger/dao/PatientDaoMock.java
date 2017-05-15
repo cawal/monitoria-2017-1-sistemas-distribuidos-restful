@@ -15,7 +15,7 @@ public class PatientDaoMock {
         // if there is no patient (first run), lets create some to play with then
         if(!initialized){
             Patient p1 = new Patient();
-            p1.setId(UUID.randomUUID().toString());
+            p1.setId("chico");
             p1.setName("Chico Buarque");
             Telephone t1 = new Telephone();
             t1.setId(UUID.randomUUID().toString());
@@ -26,7 +26,7 @@ public class PatientDaoMock {
 
 
             Patient p2 = new Patient();
-            p2.setId(UUID.randomUUID().toString());
+            p2.setId("elis_pimentinha");
             p2.setName("Elis Regina");
             Telephone t2 = new Telephone();
             t2.setId(UUID.randomUUID().toString());
