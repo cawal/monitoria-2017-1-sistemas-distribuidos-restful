@@ -14,7 +14,7 @@ Inicialmente, modelamos conceitualmente os dados manipulados pela aplicação.
 Este modelo conceitual pode ser representado pelo modelo entidade-relacionamento do banco de dados, um conjunto de classes que encapsulam os dados da aplicação ou um modelo mais abstrato, como um diagrama de classes UML.
 Um modelo conceitual simples para os dados da nossa clínica é apresentado abaixo:
 
-![Diagrama conceitual do domínio](./Enunciado/class diagram.png)
+![Diagrama conceitual do domínio](class_diagram.png)
 
 - **Patient**: Representa um paciente da clínica. Um paciente possui um nome (atributo `name`) e uma lista (possivelmente vazia) de números de telefone associados (referência `telephones`).
   Um número de telefone dessa lista pode ser especificado como o número de preferência para o contato com o paciente (referência `preferredPhone`).
